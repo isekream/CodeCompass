@@ -119,6 +119,30 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Rescue specific exceptions rather than general `Exception` or `StandardError`; use `ensure` blocks for cleanup code.
 - Use Bundler for dependency management; specify appropriate version constraints in `Gemfile` and always commit `Gemfile.lock` for applications.
 
+### iOS/Swift Rules
+- Follow Swift API Design Guidelines and use SwiftLint/SwiftFormat for consistent style enforcement.
+- Prefer `struct` (value type) over `class` (reference type) for data models where identity isn't crucial.
+- Declare variables as immutable (`let`) by default; only use `var` when mutation is required.
+- Handle optionals safely with optional binding (`if let`, `guard let`) or nil-coalescing (`??`); avoid force unwrapping (`!`).
+- Use Swift's strong type system; avoid `Any` or `AnyObject` unless absolutely necessary.
+- Prefer modern Swift concurrency (`async`/`await`, `actor`) over callback-based approaches or GCD.
+- Choose appropriate UI framework (UIKit vs SwiftUI) based on project requirements and target platforms.
+- Prevent memory leaks by avoiding retain cycles; use `[weak self]` in closures and `weak var delegate` for delegates.
+- Perform all UI updates on the main thread/actor; offload long-running tasks to background threads.
+- Use Instruments for profiling (CPU, memory, energy); profile on real devices for accurate performance measurements.
+
+### Android/Kotlin Rules
+- Prefer Kotlin over Java for new Android development; follow official Kotlin Coding Conventions and Android Kotlin Style Guide.
+- Embrace Kotlin's null safety features; use non-nullable types by default and avoid force unwrapping (`!!`).
+- Prefer immutable variables (`val`) and collections; use `data class` for immutable data holders.
+- Use scope functions (`let`, `run`, `apply`, `also`) appropriately and extension functions for utility methods.
+- Follow recommended MVVM/MVI architecture with Android Architecture Components (ViewModel, LiveData/StateFlow, Room).
+- Use dependency injection frameworks like Hilt or Koin to manage dependencies and improve testability.
+- Prefer Jetpack Compose for new UIs; follow unidirectional data flow and proper state management principles.
+- Use Kotlin Coroutines for asynchronous operations within appropriate lifecycle-aware scopes (`viewModelScope`, `lifecycleScope`).
+- Use appropriate solutions for background tasks: Coroutines for scope-bound operations, WorkManager for deferrable work.
+- Secure sensitive data with Android Keystore via Jetpack Security; use proper permissions and secure IPC mechanisms.
+
 ### CSS/SCSS Rules
 - Use consistent formatting with 2-space indentation and meaningful whitespace.
 - Prefer classes over IDs and tag selectors for styling components.
@@ -276,6 +300,18 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Create role-based dashboards that correlate logs, metrics, and traces for troubleshooting.
 - Ship logs and metrics to centralized platforms with appropriate retention policies.
 - Implement anomaly detection for identifying unusual patterns in performance or security.
+
+### Chaos Engineering Rules
+- Apply chaos engineering to proactively identify weaknesses by injecting controlled failures in systems.
+- Follow a scientific approach: define steady state metrics, formulate specific hypotheses, and design controlled experiments.
+- Focus on realistic failure modes: resource exhaustion, network issues, instance failures, and dependency problems.
+- Start with small blast radius and gradually increase scope as confidence grows; use extreme caution in production.
+- Implement automated stop conditions that halt experiments if metrics degrade beyond acceptable thresholds.
+- Always have a clear rollback plan and maintain control plane access during experiments.
+- Use dedicated chaos tools (e.g., Gremlin, Steadybit, LitmusChaos) instead of ad-hoc scripts for safe fault injection.
+- Integrate chaos practices into the development lifecycle and CI/CD pipelines for pre-production environments.
+- Conduct regular "Game Day" exercises to test incident response procedures and team communication.
+- Document and share experiment results to improve collective understanding and system robustness.
 
 ## Framework-Specific Guidelines
 
@@ -503,6 +539,26 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Choose appropriate testing tools (JMeter, k6, Locust, Gatling) based on protocols, scripting needs, and team skills.
 - Integrate performance tests into CI/CD pipelines with quality gates that fail builds if performance regressions occur.
 - Analyze results thoroughly across metrics and correlate with application monitoring data to pinpoint bottlenecks.
+- **E2E Testing**: Verify complete user workflows across the entire application stack, focusing on critical business flows.
+- Position E2E tests at the top of the testing pyramid; have fewer E2E tests compared to unit/integration tests due to their higher maintenance costs.
+- Design tests from the user's perspective, focusing on what users do rather than how the system implements functionality.
+- Make each test independent and self-contained; avoid dependencies between tests or on shared application state.
+- Set up test prerequisites through APIs rather than UI interactions when possible for faster, more reliable tests.
+- Use the Page Object Model pattern to abstract UI structure and interaction details from test logic.
+- Prefer stable selectors: dedicated test attributes (data-testid), ARIA roles/labels, or semantic attributes over brittle CSS selectors.
+- Avoid fixed sleep/wait times; use the testing framework's built-in automatic waiting capabilities and explicit conditional waits.
+- Manage test data properly: create isolated data, clean up after tests, and avoid hardcoding sensitive information.
+- Run tests in parallel, in headless mode, and with limited retry strategies in CI/CD environments; capture screenshots and videos on failures.
+- **Contract Testing**: Verify that independently developed services adhere to a shared understanding of their API interactions.
+- Implement consumer-driven contract testing where service consumers define the minimal contracts they require from providers.
+- Use contract tests to enable confident independent deployment of microservices and detect breaking API changes early.
+- For consumers: write tests against mock providers that define expected requests and minimum required responses.
+- For providers: verify that actual implementations can fulfill all consumer contracts by replaying contract requests.
+- Use appropriate matchers (type, regex) instead of exact values to make contracts less brittle to non-breaking changes.
+- Integrate contract testing in CI/CD pipelines with automated contract generation, verification, and compatibility checks.
+- Share contracts via a broker (like Pact Broker) rather than manual file sharing to enable versioning and deployment checks.
+- Use provider states to set up necessary preconditions for contract verification (e.g., "a user with ID 123 exists").
+- Leverage contract testing to complement (not replace) unit tests and reduce reliance on slow, brittle end-to-end tests.
 
 ### Development Workflow
 - Write meaningful commit messages following the Conventional Commits specification.
