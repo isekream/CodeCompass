@@ -4,7 +4,7 @@ A comprehensive collection of development guidelines, best practices, and coding
 
 ## Overview
 
-CodeCompass serves as a centralized reference for developers seeking consistent, proven practices across various programming languages, frameworks, architectural patterns, and technologies. Whether you're building microservices, working with databases, implementing security measures, or adopting cloud solutions, CodeCompass provides curated guidance to help developers navigate the complex software development landscape.
+CodeCompass serves as a centralized reference for developers seeking consistent, proven practices across various programming languages, frameworks, architectural patterns, and technologies. The main use case is to enable seamless adoption of these rules and best practices in modern AI coding assistants and developer tools such as windsurf.ai, cursor.ai, cline.bot, and similar platforms. Whether you're building microservices, working with databases, implementing security measures, or adopting cloud solutions, CodeCompass provides curated guidance to help developers and enthusiasts to navigate the complex software development landscape.
 
 ## Contents
 
