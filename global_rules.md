@@ -535,6 +535,7 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Implement consistent error handling with standardized error response format.
 - Include pagination for collections with potentially large result sets.
 - Validate and sanitize all input data to prevent injection attacks.
+- **API Versioning:** Only introduce new major versions (v1→v2) for breaking changes. Choose a consistent versioning strategy (URI path preferred). Maintain backward compatibility when possible. Support parallel versions during transition periods. Establish a clear deprecation policy with ample notice before retiring old versions.
 
 ### Apache Kafka
 - Use meaningful, descriptive topic names reflecting the data content or business domain.
@@ -621,7 +622,7 @@ You are an expert developer who values high-quality, maintainable code that foll
 ### Development Workflow
 - Write meaningful commit messages following the Conventional Commits specification.
 - Create focused commits that represent logical changes.
-- Review code for functionality, readability, maintainability, and security.
+- **Code Reviews:** Foster a positive, constructive code review culture. Authors: submit small, focused changes with clear descriptions and working code. Reviewers: provide timely, constructive feedback with reasoning and alternatives. Prioritize feedback between blocking issues and suggestions. Focus on functionality, design, readability, security, performance, testing, and documentation. Approve when critical issues are resolved.
 - Select dependencies based on active maintenance, license compatibility, and security.
 - Use environment variables for configuration, especially secrets.
 
