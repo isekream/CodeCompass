@@ -320,6 +320,54 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Use Rails' built-in security features: CSRF protection, secure parameter filtering, and encrypted credentials.
 - Implement appropriate caching strategies and move time-consuming tasks to background jobs.
 
+### ASP.NET Core
+- Structure applications in logical layers; consider Clean Architecture or Onion Architecture for larger projects.
+- Leverage the built-in Dependency Injection system with appropriate service lifetimes (Singleton, Scoped, Transient).
+- Apply middleware in the correct sequence; place exception handling early and endpoint execution last.
+- Use the Options pattern with strongly-typed POCO classes to access configuration from multiple sources.
+- Secure applications with HTTPS, proper authentication/authorization, anti-forgery tokens, and security headers.
+- Keep controllers/endpoints focused on HTTP concerns; move business logic to service classes.
+- Use async/await for all I/O operations with proper cancellation token support.
+- Implement response caching, compression, and other performance optimizations appropriately.
+- Write integration tests using WebApplicationFactory to test the complete request pipeline.
+- Configure environment-specific settings using environment variables and configuration files.
+
+### Angular
+- Follow the official Angular Style Guide for file organization, naming conventions, and code structure.
+- Prefer standalone components (Angular 14+) over NgModule-based architecture for better tree-shaking.
+- Use `OnPush` change detection strategy for components to improve performance.
+- Maintain a clear separation between smart (container) and dumb (presentational) components.
+- Use services with `providedIn: 'root'` for singleton application-wide state and business logic.
+- Utilize Angular's dependency injection system properly; inject dependencies via constructors.
+- Prevent memory leaks by properly unsubscribing from observables using `async` pipe or `takeUntil`.
+- Organize code into Core, Shared, and Feature modules/directories with clear responsibilities.
+- Implement lazy loading for feature modules or standalone components to improve initial load time.
+- Use RxJS operators appropriately; avoid nested subscriptions in favor of higher-order mapping operators.
+
+### Vue.js
+- Follow the official Vue Style Guide, especially Priority A and B rules.
+- Use Single File Components (`.vue` files) to encapsulate template, script, and style.
+- Prefer Composition API with `<script setup>` for Vue 3 projects; maintain consistency in API choice.
+- Define props clearly with object syntax including type, required, default, and validator properties.
+- Always provide a unique `:key` with `v-for` directives for efficient rendering.
+- Avoid `v-if` on the same element as `v-for`; filter data with computed properties instead.
+- Move complex template logic to computed properties or methods for better readability.
+- Use component naming conventions: multi-word `PascalCase` names with prefixes for base/common components.
+- Leverage directive shorthands (`:` for `v-bind`, `@` for `v-on`, `#` for `v-slot`) for cleaner templates.
+- Use Pinia for state management in Vue 3 projects; implement lazy loading for routes and components.
+
+### Svelte & SvelteKit
+- Use Svelte's compiler-based approach to write concise, declarative code with minimal boilerplate.
+- Leverage reactive declarations (`$: value = expression`) for derived state; avoid unnecessary recalculations.
+- Declare props using `export let propName` with default values when optional (`export let count = 0`).
+- Dispatch events with `createEventDispatcher`; use `on:event-name` for forwarding events from child components.
+- Use Svelte stores (`writable`, `readable`, `derived`) for shared state; access with `$store` auto-subscription syntax.
+- Take advantage of scoped styles by default; use `:global()` sparingly for targeting external elements.
+- Use `class:name={condition}` and `style:property={value}` directives for dynamic styling.
+- Provide unique keys in `{#each items as item (item.id)}` for efficient list rendering.
+- With SvelteKit, utilize file-based routing in `src/routes/` with `+page.svelte` and `+layout.svelte` files.
+- Fetch data using `load` functions in `+page.js` or `+page.server.js`; handle form submissions with Form Actions.
+
 ### Django
 - Follow the standard Django app structure.
 - Use Django's Class-Based Views for standard CRUD operations.
@@ -409,6 +457,30 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Choose language-appropriate tools: ESLint/Prettier for JS/TS, Black/Flake8 for Python, gofmt for Go, etc.
 - Format entire files at once to maintain consistency throughout the codebase.
 - Address linting issues promptly; don't let warnings accumulate.
+
+### Webpack
+- Set `mode` explicitly to `'development'` or `'production'` to enable appropriate optimizations.
+- Configure output with proper filename patterns; use `[contenthash]` for production long-term caching.
+- Maintain separate configs for development and production; share common settings with `webpack-merge`.
+- Apply loaders only to necessary files; exclude `node_modules` to speed up builds.
+- Understand loader chaining order (right-to-left/bottom-to-top) for correct preprocessing.
+- Use essential plugins like `HtmlWebpackPlugin`, `MiniCssExtractPlugin`, and `DefinePlugin`.
+- Enable Webpack 5's persistent filesystem cache with `cache: { type: 'filesystem' }` for faster rebuilds.
+- Implement code splitting with dynamic `import()` or `optimization.splitChunks` for smaller chunks.
+- Leverage tree shaking by using ES modules and marking packages as side-effect-free when appropriate.
+- Use bundle analyzers to identify large dependencies and optimization opportunities.
+
+### Vite
+- Leverage Vite's native ES Module (ESM) approach for faster development experience.
+- Use TypeScript with `defineConfig` for type-safe configuration in `vite.config.ts`.
+- Implement conditional configurations based on command (`serve`/`build`) and mode (`development`/`production`).
+- Maintain HMR-friendly code and properly configure framework plugins for optimal hot-reloading.
+- Understand Vite's development server features: pre-bundling dependencies with esbuild and HTTP caching.
+- Remember that Vite uses Rollup for production builds with automatic code splitting and tree shaking.
+- Configure path aliases (`resolve.alias`) to simplify imports across your project.
+- Place static assets appropriately: `public/` for as-is serving or `src/assets/` for bundled resources.
+- Prefix environment variables with `VITE_` to expose them to client code via `import.meta.env`.
+- Keep plugin usage minimal and prefer official `@vitejs/` plugins for core functionalities.
 
 ## Interaction Guidelines
 
