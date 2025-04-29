@@ -79,6 +79,46 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Keep functions focused and small; minimize nesting with early returns.
 - Write tests using table-driven patterns and the standard `testing` package.
 
+### Java Rules
+- Follow Google Java Style Guide for formatting; use 4 spaces for indentation and K&R style braces.
+- Follow standard naming conventions: `PascalCase` for classes, `camelCase` for methods/variables, `SCREAMING_SNAKE_CASE` for constants.
+- Prefer composition over inheritance; use interfaces to define capabilities that unrelated classes can implement.
+- Use `try-with-resources` for resources implementing `AutoCloseable`; avoid `finalize()` methods.
+- Make classes and members as private as possible; favor immutability with `final` fields where appropriate.
+- Validate method parameters early and throw appropriate standard exceptions (`IllegalArgumentException`, etc.).
+- Return `Optional<T>` to represent potentially absent results, but not for fields or parameters.
+- Use concurrent collections and high-level utilities from `java.util.concurrent` for thread safety.
+
+### C# / .NET Core Rules
+- Follow Microsoft C# Coding Conventions; use 4 spaces for indentation and Allman style braces (each brace on a new line).
+- Use proper naming conventions: `PascalCase` for types/methods/properties, `camelCase` for parameters/variables, prefix interfaces with `I`.
+- Use `var` only when type is obvious; use properties instead of public fields for encapsulation.
+- Properly handle disposable resources with `using` statements/declarations to ensure timely cleanup.
+- Use async/await for I/O operations; avoid mixing blocking and async code; propagate `CancellationToken` for cancellation support.
+- Embrace dependency injection; follow appropriate service lifetimes (`Singleton`, `Scoped`, `Transient`).
+- Use EF Core with proper optimization techniques; prefer async methods and avoid N+1 query problems.
+- Build secure applications with thorough input validation, proper secrets management, and regular dependency updates.
+
+### PHP Rules
+- Follow PHP Standards Recommendations (PSRs): PSR-1 (Basic Coding), PSR-12 (Extended Coding Style), and PSR-4 (Autoloading).
+- Use 4 spaces for indentation; follow consistent brace styles (next line for classes/methods, same line for control structures).
+- Enforce standards with tools like PHP_CodeSniffer and PHP CS Fixer; use Composer for dependency management.
+- Validate and sanitize ALL user input using filter functions; use prepared statements with PDO or MySQLi for database queries.
+- Configure proper error reporting per environment: display errors in development, log errors (but don't display) in production.
+- Avoid error suppression operator (`@`); use try-catch for exception handling instead.
+- Use modern PHP security features like strong password hashing with Argon2id or bcrypt (`password_hash()`/`password_verify()`).
+- Leverage PHP 7/8 features: strict type declarations, property types, constructor property promotion, match expressions, attributes.
+
+### Ruby Rules
+- Follow the community Ruby Style Guide; use 2 spaces for indentation and enforce with RuboCop or similar linters.
+- Use `snake_case` for variables/methods, `PascalCase` for classes/modules, and `SCREAMING_SNAKE_CASE` for constants.
+- Prefer iterators with blocks (`.each`, `.map`, `.select`) over traditional `for` loops; use `{...}` for single-line blocks, `do...end` for multi-line.
+- Embrace Ruby's truthiness: only `false` and `nil` are falsy; use this directly in conditionals (e.g., `if user` instead of `if user != nil`).
+- Use guard clauses (early returns) at the beginning of methods to avoid deep nesting and improve readability.
+- Define small, focused classes and methods; use modules for namespacing and sharing behavior (mixins).
+- Rescue specific exceptions rather than general `Exception` or `StandardError`; use `ensure` blocks for cleanup code.
+- Use Bundler for dependency management; specify appropriate version constraints in `Gemfile` and always commit `Gemfile.lock` for applications.
+
 ### CSS/SCSS Rules
 - Use consistent formatting with 2-space indentation and meaningful whitespace.
 - Prefer classes over IDs and tag selectors for styling components.
@@ -255,6 +295,30 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Design with a mobile-first approach, using responsive prefixes (sm:, md:, etc.) for larger screens.
 - Ensure proper content configuration for effective purging of unused styles in production.
 - Leverage Tailwind's state variants (hover:, focus:, dark:) for interactive styling.
+
+### Express.js
+- Organize projects with clear separation of concerns: routes, controllers, services, models, middleware, and config.
+- Use `express.Router()` to group related routes into modular files mounted at specific base paths.
+- Apply middleware in the correct order; security, parsing, and logging early, error handling last.
+- Implement centralized error handling middleware using `(err, req, res, next)` signature.
+- Validate and sanitize all input using libraries like express-validator or joi.
+- Apply security best practices with helmet, CORS configuration, rate limiting, and CSRF protection.
+- Keep route handlers lean; move business logic to service layer components.
+- Create standardized API responses with appropriate HTTP status codes and consistent formatting.
+- Design clear, resource-oriented API endpoints following RESTful principles.
+- Test comprehensively with unit, integration, and end-to-end API tests.
+
+### Ruby on Rails
+- Embrace convention over configuration; follow Rails naming conventions and file structure.
+- Follow "fat model, skinny controller" principle; keep controllers focused on request handling only.
+- Use RESTful design with standard resource actions (`index`, `show`, `new`, `create`, `edit`, `update`, `destroy`).
+- Always use Strong Parameters with `require` and `permit` to prevent mass assignment vulnerabilities.
+- Define clear associations in models (`has_many`, `belongs_to`) and use appropriate dependency options.
+- Create named scopes in models for common query conditions and use eager loading (`includes`) to avoid N+1 queries.
+- Extract complex business logic into service objects or concerns to keep models and controllers clean.
+- Minimize view logic; use helpers, presenters, or partials for reusable view components.
+- Use Rails' built-in security features: CSRF protection, secure parameter filtering, and encrypted credentials.
+- Implement appropriate caching strategies and move time-consuming tasks to background jobs.
 
 ### Django
 - Follow the standard Django app structure.
