@@ -391,6 +391,42 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Use established design patterns appropriately, but avoid overengineering.
 - Separate business logic from infrastructure concerns.
 
+### Microservices
+- Define service boundaries aligned with business capabilities using Domain-Driven Design principles.
+- Keep services loosely coupled; use well-defined APIs and events for communication rather than shared databases.
+- Design for failure with resilience patterns: timeouts, retries, circuit breakers, and bulkheads.
+- Choose appropriate communication styles: synchronous (REST, gRPC) for immediate responses and asynchronous (events, messaging) for decoupling.
+- Implement the Database per Service pattern with polyglot persistence based on service requirements.
+- Accept eventual consistency across services; use saga patterns for cross-service transactions.
+- Containerize services and deploy with orchestration platforms like Kubernetes.
+- Ensure robust observability through centralized logging, correlation IDs, distributed tracing, and health checks.
+- Implement comprehensive security: API gateways, service-to-service authentication, authorization, and secrets management.
+- Focus testing on unit, integration, and contract tests rather than extensive end-to-end tests.
+
+### Event-Driven Architecture
+- Design producers and consumers to be loosely coupled with contracts defined only through event schemas.
+- Use clear, past-tense event naming (e.g., `OrderCreated`, `PaymentProcessed`) to indicate actions that have occurred.
+- Choose appropriate event payload strategies: minimal notification, state transfer, or hybrid approaches.
+- Define and version event schemas (using JSON Schema, Avro, Protobuf) with a schema registry to manage evolution.
+- Include standard metadata in events: `event_id`, `timestamp`, `correlation_id`, `schema_version`, and source.
+- Select the appropriate event broker/router (Kafka, RabbitMQ, cloud services) based on throughput and delivery needs.
+- Ensure atomicity between database state changes and event publishing using patterns like Transactional Outbox.
+- Make consumers idempotent to handle potential duplicate events without side effects.
+- Implement proper error handling with retries for transient issues and dead-letter queues for permanent failures.
+- Prefer event choreography over centralized orchestration except for complex workflows requiring central coordination.
+
+### Serverless Architecture
+- Design functions with single responsibility; keep them small, focused, and stateless.
+- Make functions idempotent, especially when triggered by event sources with at-least-once delivery semantics.
+- Store all persistent state outside functions using managed services (databases, object storage, key-value stores).
+- Use step functions/state machines for complex, multi-step processes requiring state coordination.
+- Mitigate cold starts by keeping deployment packages small, initializing resources outside handlers, and using provisioned concurrency.
+- Configure appropriate memory allocation and timeouts based on workload requirements and cost considerations.
+- Apply least privilege principle for function execution roles, granting only necessary resource permissions.
+- Front HTTP-triggered functions with API Gateways that handle authentication and authorization.
+- Store sensitive configuration in dedicated secrets management services, not as environment variables.
+- Implement structured logging, centralized metrics collection, and distributed tracing for comprehensive observability.
+
 ### Architecture Decision Records (ADRs)
 - Document architecturally significant decisions in ADRs, focusing on one decision per record.
 - Create ADRs for decisions impacting non-functional requirements, structure, dependencies, or key technology choices.
@@ -424,6 +460,33 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Store passwords using strong adaptive hashing algorithms.
 - Implement proper authorization checks at every entry point.
 - Encrypt sensitive data at rest and in transit.
+- **Threat Modeling**: Conduct structured threat modeling during the design phase and after significant changes.
+- Use the STRIDE methodology (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege).
+- Create data flow diagrams showing components, data stores, and trust boundaries during system decomposition.
+- Systematically analyze and rate threats based on likelihood and potential impact to prioritize mitigation efforts.
+- Document threat models with system diagrams, threat lists, risk assessments, and mitigation plans in version control.
+- Integrate threat modeling into the SDLC through design reviews, involving cross-functional team members.
+- **Secure Defaults**: Configure systems and applications to be secure out-of-the-box, requiring minimal security changes for production.
+- Apply least privilege principles in default access controls; deny access by default and require explicit grants.
+- Never ship products with default, hardcoded, or easily guessable credentials; require users to set strong credentials on first use.
+- Use strong, current cryptography by default (TLS 1.2+, strong ciphers, secure hashing) and disable weak algorithms.
+- Configure secure session defaults (short timeouts, HttpOnly, Secure, SameSite cookie flags) and robust error handling.
+- Minimize attack surface by disabling unused ports, services, features, and removing sample content before deployment.
+- Prefer frameworks and libraries with built-in security features; verify and override insecure defaults when necessary.
+- **Penetration Testing**: Conduct ethical, authorized penetration testing to identify vulnerabilities before attackers do.
+- Define clear objectives, asset scope, and boundaries in a formal Rules of Engagement (ROE) document signed by all parties.
+- Select appropriate test types (black box, white box, or grey box) based on objectives and system knowledge.
+- Follow recognized methodologies (PTES, OWASP Testing Guide) through phases of reconnaissance, scanning, exploitation, and cleanup.
+- Minimize operational disruption during testing and maintain communication with the system owner's point of contact.
+- Provide comprehensive reports with executive summaries, detailed findings, risk ratings (CVSS), and actionable remediation steps.
+- Conduct retesting after vulnerabilities are addressed to verify effective remediation.
+- **Secrets Rotation**: Regularly rotate secrets (passwords, API keys, certificates) to limit the time window for using compromised credentials.
+- Automate secrets rotation whenever possible using dedicated secrets management solutions (HashiCorp Vault, AWS Secrets Manager, etc.).
+- Determine rotation frequency based on risk: highly sensitive credentials (30-90 days), service-to-service credentials (60-180 days).
+- Implement zero-downtime rotation using dual secrets mechanisms where applications try the newest version first, then fall back.
+- Applications should fetch secrets dynamically rather than embedding them in configuration files or environment variables.
+- Immediately rotate any secret suspected of compromise or exposure (found in logs, code commits) or after personnel changes.
+- Generate robust audit trails for all rotation events and maintain monitoring and alerting for rotation failures.
 
 ### Testing
 - Write unit tests for individual components in isolation.
@@ -431,6 +494,15 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Structure unit tests using the Arrange-Act-Assert pattern.
 - Keep tests fast, independent, repeatable, self-validating, and timely (FIRST principles).
 - Use appropriate test doubles (mocks, stubs) for external dependencies.
+- **Performance Testing**: Evaluate how systems behave under expected and stressed load conditions to identify bottlenecks.
+- Define clear, measurable performance goals (e.g., "API response time < 500ms with 1000 concurrent users").
+- Conduct various test types: load testing (expected conditions), stress testing (find breaking points), endurance testing (sustained load), and spike testing (sudden traffic changes).
+- Measure critical metrics: response time (especially percentiles), throughput (RPS/TPS), error rates, and server-side resource utilization.
+- Use realistic test scenarios that simulate actual user behavior with appropriate think time between actions.
+- Test in environments that closely mirror production with sufficient test data and proper monitoring.
+- Choose appropriate testing tools (JMeter, k6, Locust, Gatling) based on protocols, scripting needs, and team skills.
+- Integrate performance tests into CI/CD pipelines with quality gates that fail builds if performance regressions occur.
+- Analyze results thoroughly across metrics and correlate with application monitoring data to pinpoint bottlenecks.
 
 ### Development Workflow
 - Write meaningful commit messages following the Conventional Commits specification.
