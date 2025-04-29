@@ -39,6 +39,18 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Avoid using the any type. Use unknown with type guards when necessary.
 - Maintain stable object shapes for V8 optimization.
 
+### CSS/SCSS Rules
+- Use consistent formatting with 2-space indentation and meaningful whitespace.
+- Prefer classes over IDs and tag selectors for styling components.
+- Follow BEM (Block, Element, Modifier) or similar naming conventions for class names.
+- Limit specificity and avoid using !important except as a last resort.
+- Organize SCSS files into logical folders with partials for variables, components, and layouts.
+- Limit nesting depth to 2-3 levels in SCSS to avoid specificity issues and complex selectors.
+- Use variables for colors, spacing, and typography to maintain consistency.
+- Optimize animations by using transform and opacity properties when possible.
+- Ensure sufficient color contrast and proper focus styles for accessibility.
+- Apply responsive design using a mobile-first approach with flexible layouts.
+
 ### Database Rules
 
 #### PostgreSQL Rules
@@ -86,6 +98,85 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Leverage appropriate discount models (CUDs, SUDs, Spot VMs) to optimize costs.
 - Manage GCP resources using infrastructure as code (Terraform or Deployment Manager).
 
+#### Azure Rules
+- Utilize the Azure hierarchy (Management Groups, Subscriptions, Resource Groups) effectively.
+- Apply Azure Policy to enforce organizational standards and compliance requirements.
+- Use RBAC with least privilege, assigning roles at the narrowest scope possible.
+- Implement Privileged Identity Management (PIM) for just-in-time privileged access.
+- Enforce Multi-Factor Authentication (MFA) for all users, especially administrators.
+- Use Managed Identities for Azure resources instead of storing credentials.
+- Enable Microsoft Defender for Cloud across subscriptions with appropriate plans.
+- Implement private endpoints for PaaS services to avoid public network exposure.
+- Optimize costs through right-sizing, reservations, and auto-scaling resources.
+- Document and enforce consistent tagging strategies across resources.
+
+## DevOps & Operations Guidelines
+
+### Docker Rules
+- Use minimal, trusted base images with specific version tags instead of `latest`.
+- Implement multi-stage builds to separate build dependencies from runtime environment.
+- Order Dockerfile instructions from least to most frequently changing to optimize layer caching.
+- Run containers as non-root users and implement appropriate security controls.
+- Never hardcode secrets in Dockerfiles; use build-time secrets or external secret management.
+- Include health checks and appropriate metadata labels in your images.
+- Regularly scan container images for vulnerabilities before deployment.
+- Set appropriate resource limits for containers to prevent resource exhaustion.
+- Implement proper logging and monitoring for containerized applications.
+- Use docker-compose for local development with proper service segmentation and volume management.
+
+### Kubernetes Rules
+- Use namespaces to logically partition cluster resources by environment, team, or application.
+- Define all resources using declarative YAML manifests stored in version control.
+- Use Deployments for stateless applications and StatefulSets for stateful applications.
+- Configure appropriate resource requests and limits for all containers.
+- Implement Security Contexts to enforce containers running as non-root with appropriate capabilities.
+- Use ConfigMaps for non-sensitive configuration and Secrets (properly managed) for sensitive data.
+- Define Network Policies to control pod-to-pod communication.
+- Implement RBAC with least privilege for cluster access control.
+- Use Services and Ingress resources to control traffic appropriately.
+- Apply Pod Disruption Budgets to ensure availability during voluntary disruptions.
+- Implement proper health checks (liveness, readiness, startup probes) for all applications.
+- Follow GitOps principles for cluster configuration and application deployment.
+
+### Terraform Rules
+- Organize Terraform configurations logically with standard file structure (`main.tf`, `variables.tf`, `outputs.tf`).
+- Use remote state backends with locking and encryption for collaboration and security.
+- Create reusable modules following standard structure with proper documentation.
+- Provide descriptive names, types, and descriptions for all variables and outputs.
+- Mark sensitive data with `sensitive = true` and avoid hardcoding secrets in configuration files.
+- Use specific version constraints for providers and modules to ensure consistency.
+- Split large infrastructures into smaller, manageable configurations (by environment or component).
+- Enforce code reviews and automated validation in CI/CD pipelines before applying changes.
+- Use `count` or `for_each` appropriately for resource creation patterns.
+- Apply consistent naming conventions and tagging strategies across resources.
+- Run security scanning tools (tfsec, checkov) to identify misconfigurations before deployment.
+
+### CI/CD Rules
+- Automate everything: builds, tests, security scanning, deployment, and rollbacks.
+- Structure pipelines into logical stages (build, test, security scan, deploy) with appropriate gates.
+- Use containerized build environments for consistency and reproducibility.
+- Store build artifacts in dedicated repositories with proper versioning.
+- Implement security scanning (SAST, SCA, container scanning) as early as possible.
+- Never hardcode secrets in pipeline definitions; use appropriate secrets management.
+- Promote the same immutable artifact through different environments (dev → staging → prod).
+- Implement appropriate deployment strategies (rolling, blue/green, canary) based on application needs.
+- Add manual approval gates before deploying to production environments.
+- Monitor deployments closely for errors and performance degradation immediately after release.
+- Implement proper notifications and feedback loops to development teams.
+
+### Monitoring & Logging Rules
+- Implement the three pillars of observability: logs, metrics, and traces.
+- Use structured logging (preferably JSON) with standardized fields and consistent log levels.
+- Never log sensitive information (passwords, API keys, PII) in plain text.
+- Define meaningful metrics for resource usage, application performance, and business outcomes.
+- Implement distributed tracing for microservices architectures with context propagation.
+- Create actionable alerts based on symptoms (user impact) rather than just causes.
+- Set alert thresholds based on historical data and SLOs, not arbitrary static values.
+- Establish clear severity levels and response expectations for different types of alerts.
+- Create role-based dashboards that correlate logs, metrics, and traces for troubleshooting.
+- Ship logs and metrics to centralized platforms with appropriate retention policies.
+- Implement anomaly detection for identifying unusual patterns in performance or security.
+
 ## Framework-Specific Guidelines
 
 ### React
@@ -94,6 +185,16 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Extract reusable logic into custom hooks.
 - Use React.memo, useMemo, and useCallback judiciously to prevent unnecessary re-renders.
 - Avoid dangerouslySetInnerHTML; sanitize content if absolutely necessary.
+
+### Tailwind CSS
+- Embrace the utility-first approach with single-purpose utility classes.
+- Customize the design system via tailwind.config.js, using theme.extend to maintain defaults.
+- Improve readability of class lists with formatters like prettier-plugin-tailwindcss.
+- Extract repeated patterns into reusable components rather than creating custom CSS classes.
+- Use @apply sparingly and only for highly reusable, complex components.
+- Design with a mobile-first approach, using responsive prefixes (sm:, md:, etc.) for larger screens.
+- Ensure proper content configuration for effective purging of unused styles in production.
+- Leverage Tailwind's state variants (hover:, focus:, dark:) for interactive styling.
 
 ### Django
 - Follow the standard Django app structure.
