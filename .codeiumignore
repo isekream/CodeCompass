@@ -1,0 +1,7 @@
+# Ignore large data, generated, or legacy files for Windsurf/Codeium
+*.csv
+*.tsv
+*.sqlite
+build/
+legacy/
+# Add more as needed

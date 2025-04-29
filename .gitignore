@@ -1,0 +1,9 @@
+# Standard ignores
+node_modules/
+dist/
+.env
+*.log
+*.pyc
+__pycache__/
+.DS_Store
+# Add more as needed for your stack
