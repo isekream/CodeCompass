@@ -39,6 +39,36 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Avoid using the any type. Use unknown with type guards when necessary.
 - Maintain stable object shapes for V8 optimization.
 
+### Node.js Rules
+- Organize code into logical modules (routes, controllers, services, models, middleware, config, utils).
+- Prefer async/await over callbacks and raw Promises for asynchronous operations.
+- Implement centralized error handling middleware and proper exception handling.
+- Avoid blocking the event loop with synchronous operations or CPU-intensive tasks.
+- Use environment variables for configuration and secrets management.
+- Implement proper security measures including input validation, rate limiting, and security headers.
+- Leverage non-blocking I/O, caching, streams, and clustering for optimal performance.
+- Write comprehensive tests (unit, integration, E2E) using established frameworks.
+
+### Rust Rules
+- Use `rustfmt` and `clippy` to maintain code quality and consistent formatting.
+- Follow Rust's naming conventions: snake_case for variables/functions, PascalCase for types/traits.
+- Embrace Rust's ownership system; prefer borrowing (`&T`, `&mut T`) over cloning when possible.
+- Use `Result<T, E>` for recoverable errors and the `?` operator for clean error propagation.
+- Avoid `.unwrap()` in production code; use proper error handling patterns instead.
+- Minimize `unsafe` code; when necessary, encapsulate it within safe abstractions.
+- Use appropriate concurrency primitives (`Arc`, `Mutex`, message passing, async/await).
+- Leverage Rust's type system to make invalid states unrepresentable at compile time.
+
+### Go (Golang) Rules
+- Format all code with `gofmt` or `goimports`; enforce this with CI checks.
+- Follow Go naming conventions: exported identifiers start with uppercase, unexported with lowercase.
+- Use explicit error handling with immediate error checks; avoid ignoring errors.
+- Wrap errors with `fmt.Errorf("%w", err)` to add context while preserving the original error.
+- Prefer concurrency via goroutines and channels over shared memory and locks when appropriate.
+- Use the `context` package for cancellation, deadlines, and request-scoped values.
+- Keep functions focused and small; minimize nesting with early returns.
+- Write tests using table-driven patterns and the standard `testing` package.
+
 ### CSS/SCSS Rules
 - Use consistent formatting with 2-space indentation and meaningful whitespace.
 - Prefer classes over IDs and tag selectors for styling components.
@@ -62,6 +92,26 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Use parameterized queries to prevent SQL injection.
 - Implement constraints (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK) to enforce data integrity.
 - Consider performance implications of schema design and query patterns.
+
+#### NoSQL Rules
+- Select the appropriate NoSQL database type (Document, Key-Value, Column-Family, Graph) based on access patterns.
+- Design schemas based on application query patterns rather than normalized entity relationships.
+- Embrace denormalization where appropriate to optimize read performance and avoid complex joins.
+- Use embedding for related data accessed together; use references for one-to-many relationships.
+- Create indexes on frequently queried fields but avoid over-indexing.
+- Choose partition keys carefully in distributed databases to ensure even data distribution.
+- Implement appropriate consistency levels based on application requirements.
+- Use secure authentication, encryption, and input validation to prevent NoSQL injection.
+
+#### Caching Rules (Redis/Memcached)
+- Implement caching strategically for frequently accessed, rarely changing data, not everything.
+- Use consistent key naming conventions (e.g., `object-type:id:field`) with appropriate granularity.
+- Choose the right caching pattern (Cache-Aside, Read-Through, Write-Through, Write-Back) based on access patterns.
+- Set appropriate TTLs based on data volatility and implement explicit invalidation strategies.
+- Use connection pooling, pipelining, and bulk operations to optimize cache performance.
+- Monitor key metrics like hit rate, latency, memory usage, and eviction rates.
+- Configure proper security with network isolation, authentication, and encryption.
+- Leverage Redis data types (Hashes, Lists, Sets) when they offer more efficient operations than simple strings.
 
 #### Supabase Rules
 - Leverage Supabase features (Auth, Storage, Realtime, Edge Functions) appropriately.
@@ -218,6 +268,14 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Aim for high cohesion and low coupling between modules.
 - Use established design patterns appropriately, but avoid overengineering.
 - Separate business logic from infrastructure concerns.
+
+### Architecture Decision Records (ADRs)
+- Document architecturally significant decisions in ADRs, focusing on one decision per record.
+- Create ADRs for decisions impacting non-functional requirements, structure, dependencies, or key technology choices.
+- Use a consistent template including title, status, date, context, options, decision outcome, and consequences.
+- Treat accepted ADRs as immutable historical records; create new ADRs for changed decisions.
+- Store ADRs in version control (e.g., `docs/adr/`) and link them from the project README.
+- Write ADRs with clarity, objectivity, and explicit acknowledgment of trade-offs.
 
 ### API Design
 - Follow REST principles for API endpoints.
