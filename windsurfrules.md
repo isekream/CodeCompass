@@ -41,6 +41,14 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Use built-in functions and libraries for performance.
 - Never use eval() or exec() on unsanitized user input.
 
+### Python (Data Science)
+- **Project Structure:** Organize data science projects with standardized directories for data (raw/interim/processed), notebooks, source code, and models.
+- **Pandas:** Prioritize vectorized operations over loops. Use method chaining for readability. Select efficient data types for memory usage. Process large datasets in chunks.
+- **NumPy:** Leverage vectorized operations and broadcasting. Use built-in functions for performance. Choose appropriate dtypes to conserve memory.
+- **Machine Learning:** Use scikit-learn Pipelines to prevent data leakage. Always split data before transformations. Employ cross-validation for model evaluation. Set random_state for reproducibility.
+- **Performance:** Profile code to identify bottlenecks. Use Cython/Numba for critical sections. Leverage parallel processing with Dask or Joblib for large computations.
+- **Validation:** Test data transformations and model logic. Ensure reproducibility with fixed random seeds and versioned dependencies.
+
 ### JavaScript/TypeScript Rules
 - Use const by default; use let only for variables that need reassignment. Avoid var.
 - Always use strict equality (===, !==).
@@ -156,6 +164,16 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Apply responsive design using a mobile-first approach with flexible layouts.
 
 ### Database Rules
+
+#### Schema Design Rules
+- **Purpose Driven:** Design schemas to represent the business domain and efficiently support primary data access patterns.
+- **Naming Conventions:** Use consistent naming (prefer snake_case for SQL). Use clear, descriptive names for tables (singular nouns) and columns.
+- **Data Types:** Choose appropriate data types that accurately represent the domain with minimal storage requirements.
+- **Keys & Relationships:** Every table must have a primary key. Use foreign keys to enforce referential integrity. Implement relationships correctly.
+- **Normalization:** Start with normalized schemas (up to 3NF) and denormalize strategically only when necessary for performance.
+- **Indexing:** Index foreign keys and columns used in WHERE, ORDER BY, and GROUP BY. Create composite and covering indexes for critical queries.
+- **Documentation:** Maintain schema documentation with ERDs, column descriptions, and explanations of constraints and relationships.
+- **Version Control:** Keep schema definitions and migration scripts in version control. Review schema changes carefully before applying them.
 
 #### PostgreSQL Rules
 - Use lowercase snake_case for all database objects (tables, columns, functions).
@@ -313,6 +331,17 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Conduct regular "Game Day" exercises to test incident response procedures and team communication.
 - Document and share experiment results to improve collective understanding and system robustness.
 
+### MLOps Rules
+- **Automation:** Automate the entire ML lifecycle (data ingestion, validation, preprocessing, training, deployment, monitoring).
+- **Reproducibility:** Version everything: code, data, models, and configurations to ensure reproducible ML processes.
+- **Continuous Practices:** Implement CI/CD for ML code, Continuous Training (CT) for model retraining, and Continuous Monitoring (CM) for deployed models.
+- **Data Management:** Use data validation, versioning, lineage tracking, and feature stores to ensure data quality and consistency.
+- **Experiment Tracking:** Log experiment parameters, metrics, and artifacts using purpose-built tools (MLflow, W&B, etc.); use a model registry for versioning.
+- **Deployment Strategies:** Implement safe model deployment with shadow deployments, canary releases, or blue/green deployments.
+- **Monitoring:** Track data drift, model performance, and system metrics; establish feedback loops for ground truth collection.
+- **Infrastructure:** Manage infrastructure as code; use containers and orchestration tools to standardize execution environments.
+- **Collaboration:** Foster cross-functional teams (data science, ML engineering, operations) with shared tools and processes.
+
 ## Framework-Specific Guidelines
 
 ### React
@@ -417,6 +446,35 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Structure code into controllers, services, repositories, and models.
 - Use appropriate annotations (@Service, @Repository, @RestController).
 - Implement proper exception handling using @ControllerAdvice.
+
+### Cross-Platform Mobile
+- **Framework Selection:** Choose the right cross-platform framework (React Native, Flutter, Kotlin Multiplatform) based on project requirements, performance needs, and team skills.
+- **Platform-Specific Code:** Isolate platform-specific code, use conditional compilation, follow framework-specific file naming conventions, and create proper abstractions.
+- **UI/UX:** Balance between platform conventions and brand consistency. Design adaptive layouts for various screen sizes. Ensure smooth UI performance on all target platforms.
+- **Native Features:** Minimize native dependencies; only use for platform-specific APIs, performance-critical tasks, or existing SDK integration. Carefully vet third-party plugins.
+- **Performance:** Profile and optimize on both platforms. Optimize startup time, keep UI thread free, optimize assets, and monitor memory usage.
+- **Testing:** Apply the testing pyramid from unit tests to E2E tests. Run tests on both platforms using real devices. Utilize device farms for broader coverage.
+- **Security:** Implement platform-specific security for data storage, permissions, and network configuration. Never embed secrets in cross-platform code.
+
+### React Native
+- **Project Structure:** Organize by feature/module rather than by type. Centralize navigation, services, and reusable components.
+- **Components:** Use functional components with hooks. Keep components small and focused. Use TypeScript interfaces for props.
+- **Styling:** Use `StyleSheet.create` for performance. Avoid inline styles. Implement theming and design tokens for consistency.
+- **State Management:** Use local state for UI elements, Context API for shared state with infrequent updates, and dedicated libraries for complex state management.
+- **Platform-Specific Code:** Use `Platform.select()` or platform-specific extensions (`.ios.js`/`.android.js`) for platform differences.
+- **Performance:** Optimize rendering with `memo`, `useMemo`, and `useCallback`. Use `FlatList` for long lists. Enable Hermes engine. Monitor bridge traffic.
+- **Native Modules:** Prefer existing libraries. Consider new architecture (TurboModules/Fabric) for better performance.
+- **Security:** Store sensitive data in platform-specific secure storage. Use HTTPS with certificate pinning. Validate deep link data.
+
+### Flutter & Dart
+- **Effective Dart:** Follow official Effective Dart guidelines (Style, Design, Usage, Documentation). Use standard Dart formatter and linters.
+- **Dart Conventions:** Use appropriate naming conventions (snake_case for files, PascalCase for types, camelCase for variables/functions). Embrace null safety and immutability with `final` and `const`.
+- **Widget Structure:** Compose UI from small, reusable widgets. Use `const` constructors whenever possible. Prefer `StatelessWidget` over `StatefulWidget` unless internal state is needed.
+- **Widget Optimization:** Keep `build()` methods pure. Break down large methods into smaller widgets. Use `Key`s appropriately for lists and dynamic content.
+- **State Management:** Choose appropriate solution (setState, Provider, Riverpod, Bloc/Cubit) based on complexity. Be consistent throughout the project.
+- **Asynchrony:** Use `async`/`await` over raw Futures. Handle errors properly. Leverage `Streams` for reactive programming. Use isolates for CPU-intensive tasks.
+- **Performance:** Minimize widget rebuilds. Optimize lists with builder constructors. Use `RepaintBoundary` strategically. Profile with Flutter DevTools to identify bottlenecks.
+- **Testing:** Write unit tests for logic, widget tests for UI components, and integration tests for critical flows. Design for testability.
 
 ## Architecture Rules
 
@@ -566,6 +624,25 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Review code for functionality, readability, maintainability, and security.
 - Select dependencies based on active maintenance, license compatibility, and security.
 - Use environment variables for configuration, especially secrets.
+
+### IDE Configuration
+- **Standardization:** Use `.editorconfig` to enforce consistent basic coding style settings across different editors and IDEs.
+- **Project Settings:** Store project-specific IDE settings in the repository (e.g., `.vscode/settings.json`, select `.idea/` files).
+- **Key Configurations:** Standardize settings for formatting, linting, import organization, file encodings (UTF-8), and line endings (LF).
+- **Core Extensions:** Maintain a documented list of recommended IDE extensions/plugins for the project's languages and frameworks.
+- **Sharing:** Commit shared project settings to version control and document IDE setup guidelines in README or CONTRIBUTING files.
+- **Formatting Integration:** Configure IDEs to use project's preferred formatters (Black, Prettier, gofmt, etc.) with format-on-save when feasible.
+- **Team Agreement:** Agree on primary IDEs and core configurations while allowing personal customizations that don't affect project consistency.
+
+### Debugging
+- **Systematic Approach:** Follow a methodical process: reproduce, isolate, hypothesize, test, fix, verify, and document.
+- **Reproducibility:** First reliably reproduce the bug, understanding the exact conditions that trigger it.
+- **Debugger Skills:** Master your IDE's debugger features (breakpoints, watch expressions, call stack inspection, stepping).
+- **Strategic Logging:** Use logging statements to trace execution flow and variable values when debuggers aren't practical.
+- **Tool Utilization:** Leverage git bisect, static analysis, and divide-and-conquer techniques to isolate issues.
+- **Language-Specific Knowledge:** Understand debugging tools and techniques specific to each language/platform (browser DevTools, pdb, delve, etc.).
+- **Learn from Bugs:** Document non-trivial bug fixes in commit messages or issue trackers and consider adding tests to prevent regressions.
+- **Question Assumptions:** Bugs often hide in incorrect assumptions; verify your understanding of how code, libraries, or systems behave.
 
 ### Git Advanced Practices
 - Make atomic commits representing single logical changes; use interactive rebase to clean up history locally.
