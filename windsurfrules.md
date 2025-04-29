@@ -21,6 +21,16 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Follow the principle of least surprise in API and function design.
 - Prefer automated formatting and linting tools.
 
+### Code Comments
+- Write comments that explain *why* code exists or works a certain way, not just *what* it does.
+- Comment complex logic, workarounds, non-obvious intent, and significant design choices.
+- Avoid commenting obvious code, restating the code, or including version control metadata.
+- Use documentation comments (docstrings) for all public APIs, explaining purpose, parameters, returns, and exceptions.
+- Follow language-specific conventions for documentation comments (Javadoc, JSDoc, docstrings).
+- Use standardized tags like `TODO`, `FIXME`, or `HACK` for code needing attention, with context and issue references.
+- Keep comments updated when code changes; outdated comments are worse than no comments.
+- Remove commented-out code; use version control to track previous implementations.
+
 ## Language-Specific Rules
 
 ### Python Rules
@@ -284,6 +294,16 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Include pagination for collections with potentially large result sets.
 - Validate and sanitize all input data to prevent injection attacks.
 
+### Apache Kafka
+- Use meaningful, descriptive topic names reflecting the data content or business domain.
+- Choose an appropriate number of partitions based on expected throughput and consumer parallelism needs.
+- Use a replication factor of at least 3 in production with min.insync.replicas set to 2.
+- Enable idempotent producers (`enable.idempotence=true`) and use `acks=all` for critical data.
+- Manually commit consumer offsets (`enable.auto.commit=false`) after successful processing.
+- Design consumers to be idempotent to handle message duplicates gracefully.
+- Use a Schema Registry (Avro, Protobuf, JSON Schema) to manage and enforce message schemas.
+- Implement comprehensive monitoring for brokers, producers, consumers, and key metrics.
+
 ## Cross-Cutting Concerns
 
 ### Security
@@ -306,6 +326,25 @@ You are an expert developer who values high-quality, maintainable code that foll
 - Review code for functionality, readability, maintainability, and security.
 - Select dependencies based on active maintenance, license compatibility, and security.
 - Use environment variables for configuration, especially secrets.
+
+### Git Advanced Practices
+- Make atomic commits representing single logical changes; use interactive rebase to clean up history locally.
+- Follow consistent branch naming conventions and choose an appropriate branching strategy.
+- Use `git rebase` for local branch cleanup, but never rebase shared history.
+- Keep pull requests small and focused with clear descriptions linking to relevant issues.
+- Leverage git hooks (pre-commit, commit-msg) to automate checks and enforce standards.
+- Use Git LFS for large binary files to avoid bloating repository history.
+- Master advanced commands like `git stash`, `git cherry-pick`, `git bisect`, and `git reflog` for specific use cases.
+
+### Linters & Formatters
+- Use both linters (for code quality and error detection) and formatters (for consistent styling).
+- Store tool configurations in the repository (`.eslintrc.js`, `.prettierrc`, `pyproject.toml`).
+- Start with standard configurations (e.g., `eslint:recommended`, Black defaults) and customize minimally.
+- Integrate with IDEs for real-time feedback and with CI pipelines as mandatory checks.
+- Employ pre-commit hooks to prevent poorly formatted or error-containing code from being committed.
+- Choose language-appropriate tools: ESLint/Prettier for JS/TS, Black/Flake8 for Python, gofmt for Go, etc.
+- Format entire files at once to maintain consistency throughout the codebase.
+- Address linting issues promptly; don't let warnings accumulate.
 
 ## Interaction Guidelines
 
