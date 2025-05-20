@@ -5,6 +5,7 @@
 Supercharge your development workflow with CodeCompass—a world-class, AI-optimized collection of coding standards, best practices, and architectural guidelines. Designed for seamless integration with next-generation coding assistants and developer platforms like windsurf.ai, cursor.ai, cline.bot, and more.
 
 ### 🚀 Why CodeCompass?
+
 - **AI-Native**: Instantly empower your favorite AI coding tools with industry-proven rules and best practices.
 - **Universal**: Covers every major language, framework, and workflow you need.
 - **Battle-Tested**: Curated by experts, trusted by teams building tomorrow’s software.
@@ -136,14 +137,16 @@ workflow/
 ---
 
 ## 🤝 Contributing
+
 We love contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for how to help make CodeCompass even better.
 
 ## 📄 License
+
 MIT — see [LICENSE](LICENSE)
 
 ## 🌟 Adopt CodeCompass Today
-Unlock the full potential of your AI coding workflow. Make every line of code world-class.
 
+Unlock the full potential of your AI coding workflow. Make every line of code world-class.
 
 The CodeCompass is guided by these core principles:
 
@@ -153,14 +156,6 @@ The CodeCompass is guided by these core principles:
 - **You Aren't Gonna Need It** - Implement only what's requested
 - **Keep It Simple, Stupid** - Prefer straightforward, maintainable solutions
 
-## Contributing
-
-We welcome contributions to CodeCompass! See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit additions or improvements.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Code of Conduct
+## 📜 Code of Conduct
 
 Please review our [Code of Conduct](CODE_OF_CONDUCT.md) before participating in this project.
